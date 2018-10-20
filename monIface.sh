@@ -4,10 +4,10 @@ anzahl=$1
 wlaninterface=$2
 param=$#
 
-	read -p "Wie viele Mon Interfaces sollen erstellt werden?" anzahl
-	read -p "Wie heisst das WLAN-interface: " wlanIface
+	read -p "How many interfaces do you want to generate? " anzahl
+	read -p "What`s the name of the pysical interface " wlanIface
 	echo "--#########################################################################--"
-	echo "es werden ${anzahl} an interfaces erstellt vom Ursprung ${wlanIface} erstellt"
+	echo "we will create ${anzahl} of interfaces from the source ${wlanIface}          "
 	echo "--#########################################################################--"
 
 counter=0
@@ -23,15 +23,15 @@ sleep 2
 	macchanger -r mon${z}
 	ifconfig mon${z} up
 	echo "--#######################################--"
-	echo "------------mon${z} erstellt"--------------
+	echo "------------mon${z} created--------------"
 	echo "--#######################################--"
 done
 
-read -p "Enter drücken um alle mons wieder zu löschen" enter
+read -p "press enter to delete the interfaces" enter
 for ((z=0;z<anzahl;z++))
 do
 iw mon${z} del
 	echo "--#######################################--"
-	echo "------------------mon${z} gelöscht---------"
+	echo "------------------mon${z} deleted---------"
 	echo "--#######################################--"
 done
