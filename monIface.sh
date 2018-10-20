@@ -3,7 +3,6 @@
 anzahl=$1
 wlaninterface=$2
 param=$#
-
 	read -p "How many interfaces do you want to generate? " anzahl
 	read -p "What`s the name of the pysical interface " wlanIface
 	echo "--#########################################################################--"
