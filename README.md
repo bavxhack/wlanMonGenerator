@@ -21,7 +21,7 @@
 ## Autodeauth all WIFI-Hotspots with the same ESSID in the Area
   * Automatic Deauth the selected WIFI-Interface. The Script opens a new Window which collects all WIFI-NEtworks with the given ESSID. To stop the searching prozess press CTR+C in the window with the airmon-ng. This could be more than one BSSID. All found BSSIDs will be Deauthed in a circular Way.
   * kali Linux -> python3 autoDeauth.py "{ESSID}" {WLAN-interface}
-  python3 autoDeauth.py "{ESSID}" {WLAN-interface}
+  
   
 ## Create a new monitoring Interface
   * Kali Linux -> "bash monIface.sh<br>
